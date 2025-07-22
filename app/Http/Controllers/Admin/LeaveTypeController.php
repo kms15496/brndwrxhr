@@ -20,7 +20,7 @@ class LeaveTypeController extends BaseCrudController
                 'name' => 'required|string',
                 
             ],
-            form_name: 'Bussiness Unit',
+            form_name: 'Leave Type',
             collectionName: 'thumbnails',
         );
     }
