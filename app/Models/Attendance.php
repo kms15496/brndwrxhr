@@ -16,6 +16,7 @@ class Attendance extends Model
         'ip_address',
         'lat',
         'long',
+        'type'
     ];
 
     public function user()

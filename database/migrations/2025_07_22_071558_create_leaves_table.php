@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->text('reason');
+            $table->date('date');
+            $table->unsignedBigInteger('leave_type');
+            $table->text('message');
+            $table->unsignedInteger('approved_by');
             $table->string('status')->default('pending');
             $table->timestamps();
         });
@@ -30,3 +31,4 @@ return new class extends Migration
         Schema::dropIfExists('leaves');
     }
 };
+

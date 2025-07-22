@@ -34,6 +34,7 @@ class AttendanceController extends Controller
             'user_id' => Auth::id(),
             'check_in' => $now,
             'ip_address' => $request->ip(),
+            'type' => $request->type
             // 'lat' => $request->lat,
             // 'long' => $request->long,
         ]);
@@ -60,9 +61,9 @@ class AttendanceController extends Controller
                 'check_out' => $now,
             ]);
 
-            $attendance->makeHidden(['created_at', 'updated_at','lat','long']);
+            $attendance->makeHidden(['created_at', 'updated_at', 'lat', 'long']);
             $attendance->check_out = Carbon::parse($attendance->check_out)->setTimezone($timezone)->format('Y-m-d H:i:s');
-            return sendResponse(200,'success',$attendance);
+            return sendResponse(200, 'success', $attendance);
         }
 
         return sendResponse(400, 'fail', null);
