@@ -57,5 +57,14 @@ return [
         'route' => 'admin.role.index',
     ],
 
+     [
+        'id' => $id++,
+        'title' => 'Leave Types',
+        'icon' => 'ph-duotone ph-gauge',
+        'roles' => ['*'],
+        'route' => 'admin.leave-types.index',
+       
+    ],
+
 
 ];

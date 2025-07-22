@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\BussinessUnitController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\LeaveTypeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CheckInOutController;
@@ -84,6 +85,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('admin/roles')
         ->name('admin.role.')
         ->controller(RoleController::class)
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'createOrEdit')->name('create');
+            Route::post('/', 'storeOrUpdate')->name('store');
+            Route::get('{id}/edit', 'createOrEdit')->name('edit');
+            Route::put('{id}', 'storeOrUpdate')->name('update');
+            Route::delete('{id}', 'destroy')->name('destroy');
+        });
+
+    Route::prefix('admin/leave-types')
+        ->name('admin.leave-types.')
+        ->controller(LeaveTypeController::class)
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'createOrEdit')->name('create');
