@@ -1,7 +1,7 @@
 @extends(config('crudkit.view_layout', 'layouts.form-layout'))
 
 @section('title')
-{{ isset($item) ? __('update') : __('add') }} {{ __($form_name) }}
+{{ isset($item) ? __('Update') : __('Add') }} {{ __($form_name) }}
 @endsection
 
 @section('form')
