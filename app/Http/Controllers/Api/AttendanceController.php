@@ -68,4 +68,34 @@ class AttendanceController extends Controller
 
         return sendResponse(400, 'fail', null);
     }
+
+    public function list()
+    {
+        $user_id = Auth::id();
+
+        $attendances = Attendance::where('user_id', $user_id)->get();
+
+        $data = collect($attendances)
+            ->groupBy(function ($item) {
+                return \Carbon\Carbon::parse($item['check_in'])->toDateString(); // Group by date
+            })
+            ->map(function ($items, $date) {
+                return [
+                    'date' => $date,
+                    'attendances' => $items->map(function ($item) {
+                        return [
+                            'user_id' => $item['user_id'],
+                            'check_in' => \Carbon\Carbon::parse($item['check_in'])->format('h:i A'), // AM/PM format
+                            'check_out' => $item['check_out']
+                                ? \Carbon\Carbon::parse($item['check_out'])->format('h:i A')
+                                : null,
+                        ];
+                    })->values()
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        return sendResponse(200, 'success', $data);
+    }
 }
