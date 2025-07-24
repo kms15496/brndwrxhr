@@ -25,10 +25,12 @@ class LeaveController extends BaseCrudController
 
 
             ],
-            form_name: 'Leaves',
+
             selectFields: [
                 'leave_type' => LeaveType::pluck('name', 'id')->toArray()
-            ]
+            ],
+            form_name: 'Leaves',
+            collectionName: null
         );
     }
 
