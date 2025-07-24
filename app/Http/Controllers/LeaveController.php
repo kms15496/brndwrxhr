@@ -12,29 +12,46 @@ use Kaung\CrudKit\Http\Controllers\BaseCrudController;
 
 class LeaveController extends BaseCrudController
 {
+    // public function __construct()
+    // {
+    //     parent::__construct(
+    //         Leave::class,              // $model
+    //         'leaves',                  // $view_base
+    //         [                          // $fields
+    //             'date' => 'required|date',
+    //             'leave_type' => 'required',
+    //             'message' => 'required|string|max:255',
+    //         ],
+    //         'Leaves',                  // $form_name
+    //         null,                      // $collectionName
+    //         [],                        // $hideFields
+    //         [],                        // $multiple
+    //         [],                        // $checkBoxFields
+    //         [],                        // $radioFields
+    //         [                          // $selectFields
+    //             'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
+    //         ]
+    //     );
+    // }
+
     public function __construct()
     {
         parent::__construct(
-            Leave::class,              // $model
-            'leaves',                  // $view_base
-            [                          // $fields
+            model: Leave::class,
+            view_base: 'leaves',
+
+            fields: [
                 'date' => 'required|date',
                 'leave_type' => 'required',
                 'message' => 'required|string|max:255',
             ],
-            'Leaves',                  // $form_name
-            null,                      // $collectionName
-            [],                        // $hideFields
-            [],                        // $multiple
-            [],                        // $checkBoxFields
-            [],                        // $radioFields
-            [                          // $selectFields
+            selectFields: [
                 'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
-            ]
+            ],
+            form_name: 'Leaves',
+            collectionName: 'thumbnails',
         );
     }
-
-   
 
     public function index()
     {
