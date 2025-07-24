@@ -12,46 +12,29 @@ use Kaung\CrudKit\Http\Controllers\BaseCrudController;
 
 class LeaveController extends BaseCrudController
 {
-    // public function __construct()
-    // {
-    //     parent::__construct(
-    //         Leave::class,              // $model
-    //         'leaves',                  // $view_base
-    //         [                          // $fields
-    //             'date' => 'required|date',
-    //             'leave_type' => 'required',
-    //             'message' => 'required|string|max:255',
-    //         ],
-    //         'Leaves',                  // $form_name
-    //         null,                      // $collectionName
-    //         [],                        // $hideFields
-    //         [],                        // $multiple
-    //         [],                        // $checkBoxFields
-    //         [],                        // $radioFields
-    //         [                          // $selectFields
-    //             'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
-    //         ]
-    //     );
-    // }
-
     public function __construct()
     {
         parent::__construct(
-            model: Leave::class,
-            view_base: 'leaves',
-            selectFields: [
-                'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
-            ],
-            fields: [
+            Leave::class,              // $model
+            'leaves',                  // $view_base
+            [                          // $fields
                 'date' => 'required|date',
                 'leave_type' => 'required',
                 'message' => 'required|string|max:255',
             ],
-
-            form_name: 'Leaves',
-            collectionName: 'thumbnails',
+            'Leaves',                  // $form_name
+            null,                      // $collectionName
+            [],                        // $hideFields
+            [],                        // $multiple
+            [],                        // $checkBoxFields
+            [],                        // $radioFields
+            [                          // $selectFields
+                'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
+            ]
         );
     }
+
+   
 
     public function index()
     {
