@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CheckInOutController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\LeaveController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -96,7 +97,21 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::prefix('admin/leave-types')
         ->name('admin.leave-types.')
+        ->middleware('role:admin')
         ->controller(LeaveTypeController::class)
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('create', 'createOrEdit')->name('create');
+            Route::post('/', 'storeOrUpdate')->name('store');
+            Route::get('{id}/edit', 'createOrEdit')->name('edit');
+            Route::put('{id}', 'storeOrUpdate')->name('update');
+            Route::delete('{id}', 'destroy')->name('destroy');
+        });
+
+    Route::prefix('leave')
+        ->name('leaves.')
+
+        ->controller(LeaveController::class)
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('create', 'createOrEdit')->name('create');

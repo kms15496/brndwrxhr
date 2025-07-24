@@ -68,6 +68,10 @@ class User extends Authenticatable
         return $this->belongsTo(BussinessUnit::class);
     }
 
+    public function leaves() {
+        return $this->hasMany(Leave::class);
+    }
+
     public static function boot()
     {
         parent::boot();

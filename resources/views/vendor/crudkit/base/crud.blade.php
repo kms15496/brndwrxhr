@@ -27,7 +27,7 @@
                 $isTextarea = (strpos($rules, 'max:255') || strpos($rules, 'min:255')) !== false;
                 @endphp
 
-                @if (in_array($field,['dob','joining_date']))
+                @if (in_array($field,['dob','joining_date','date']))
                 <input type="date" class="form-control" id="{{ $field }}" name="{{ $field }}"
                     value="{{ old($field, isset($item->$field) ? \Carbon\Carbon::parse($item->$field)->format('Y-m-d') : '') }}" required>
 

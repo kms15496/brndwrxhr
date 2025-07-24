@@ -14,11 +14,11 @@ class LeaveTypeController extends BaseCrudController
         parent::__construct(
             model: LeaveType::class,
             view_base: 'admin.leave-types',
-           
+
             fields: [
-                
+
                 'name' => 'required|string',
-                
+
             ],
             form_name: 'Leave Type',
             collectionName: 'thumbnails',

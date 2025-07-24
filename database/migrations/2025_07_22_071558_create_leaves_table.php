@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('date');
             $table->unsignedBigInteger('leave_type');
             $table->text('message');
-            $table->unsignedInteger('approved_by');
+            $table->unsignedInteger('approved_by')->nullable();
             $table->string('status')->default('pending');
             $table->timestamps();
         });

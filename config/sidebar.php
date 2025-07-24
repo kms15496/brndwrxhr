@@ -24,28 +24,28 @@ return [
         'id' => $id++,
         'title' => 'Country',
         'icon' => 'ph-duotone ph-gauge',
-        'roles' => ['*'],
+        'roles' => ['admin'],
         'route' => 'admin.country.index',
     ],
     [
         'id' => $id++,
         'title' => 'Bussiness Unit',
         'icon' => 'ph-duotone ph-gauge',
-        'roles' => ['*'],
+        'roles' => ['admin'],
         'route' => 'admin.bussiness-unit.index',
     ],
     [
         'id' => $id++,
         'title' => 'Department',
         'icon' => 'ph-duotone ph-gauge',
-        'roles' => ['*'],
+        'roles' => ['admin'],
         'route' => 'admin.department.index',
     ],
     [
         'id' => $id++,
         'title' => 'Users',
         'icon' => 'ph-duotone ph-gauge',
-        'roles' => ['*'],
+        'roles' => ['admin'],
         'route' => 'admin.user.index',
     ],
 
@@ -53,17 +53,25 @@ return [
         'id' => $id++,
         'title' => 'Roles',
         'icon' => 'ph-duotone ph-gauge',
-        'roles' => ['*'],
+        'roles' => ['admin'],
         'route' => 'admin.role.index',
     ],
 
-     [
+    [
         'id' => $id++,
         'title' => 'Leave Types',
         'icon' => 'ph-duotone ph-gauge',
-        'roles' => ['*'],
+        'roles' => ['admin'],
         'route' => 'admin.leave-types.index',
-       
+
+    ],
+    [
+        'id' => $id++,
+        'title' => 'Leave',
+        'icon' => 'ph-duotone ph-gauge',
+        'roles' => ['*'],
+        'route' => 'leaves.index',
+
     ],
 
 

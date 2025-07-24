@@ -49,7 +49,7 @@ class UserController extends BaseCrudController
                 1 => 'Yes',
                 0 => 'No'
             ],
-            'role'=>Role::pluck('name', 'id')->toArray()
+            'role' => Role::pluck('name', 'id')->toArray()
         ];
     }
 
