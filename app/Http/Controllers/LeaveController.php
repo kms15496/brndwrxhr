@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\DataTables\LeaveDataTable;
-use App\DataTables\LeaveTypeDataTable;
+
 use App\Models\Leave;
 use App\Models\LeaveType;
 use Kaung\CrudKit\Http\Controllers\BaseCrudController;
-use App\DataTables\BussinessUnitDataTable;
+
+
 class LeaveController extends BaseCrudController
 {
     // public function __construct()
@@ -38,14 +39,15 @@ class LeaveController extends BaseCrudController
         parent::__construct(
             model: Leave::class,
             view_base: 'leaves',
+            selectFields: [
+                'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
+            ],
             fields: [
                 'date' => 'required|date',
                 'leave_type' => 'required',
                 'message' => 'required|string|max:255',
             ],
-            selectFields: [
-                'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
-            ],
+
             form_name: 'Leaves',
             collectionName: 'thumbnails',
         );
