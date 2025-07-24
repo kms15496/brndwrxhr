@@ -37,19 +37,22 @@ class LeaveController extends BaseCrudController
     public function __construct()
     {
         parent::__construct(
-            model: Leave::class,
-            view_base: 'leaves',
-
-            fields: [
+            Leave::class, // $model
+            'leaves',     // $view_base
+            [             // $fields
                 'date' => 'required|date',
                 'leave_type' => 'required',
                 'message' => 'required|string|max:255',
             ],
-            selectFields: [
+            'Leaves',     // $form_name
+            'thumbnails', // $collectionName
+            [],           // $hideFields
+            [],           // $multiple
+            [],           // $checkBoxFields
+            [],           // $radioFields
+            [             // $selectFields
                 'leave_type' => LeaveType::pluck('name', 'id')->toArray(),
-            ],
-            form_name: 'Leaves',
-            collectionName: 'thumbnails',
+            ]
         );
     }
 
