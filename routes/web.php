@@ -110,7 +110,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::prefix('leave')
         ->name('leaves.')
-
         ->controller(LeaveController::class)
         ->group(function () {
             Route::get('/', 'index')->name('index');
@@ -120,4 +119,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::put('{id}', 'storeOrUpdate')->name('update');
             Route::delete('{id}', 'destroy')->name('destroy');
         });
+
+        Route::get('/leave/update/status/{id}',[LeaveController::class,'editView'])->name('leave.edit-status');
+        Route::post('/leave/update/status/{id}',[LeaveController::class,'updateLeave'])->name('leave.update-status');
+
 });

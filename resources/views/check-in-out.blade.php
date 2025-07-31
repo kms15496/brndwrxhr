@@ -7,47 +7,65 @@
 @section('content')
     <style>
         body {
-            background: #f1f5f9;
+            background-color: #f1f5f9;
         }
 
         .card {
             max-width: 500px;
             margin: 80px auto;
-            background: #ffffff;
+            background-color: #fff;
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .date {
-            font-size: 20px;
+            font-size: 18px;
             color: #555;
-            margin-bottom: 8px;
+            text-align: center;
+            margin-bottom: 10px;
         }
 
         .clock {
             font-size: 36px;
-            font-weight: bold;
+            font-weight: 600;
             color: #4f46e5;
-            margin-bottom: 30px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin-bottom: 20px;
+            font-size: 16px;
         }
 
         .button-group {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            justify-content: space-between;
+            gap: 15px;
         }
 
         .button {
-            padding: 12px 24px;
+            flex: 1;
+            padding: 12px;
             font-size: 16px;
             font-weight: bold;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background-color 0.3s ease;
             color: #fff;
         }
 
@@ -66,43 +84,50 @@
         .check-out:hover {
             background-color: #b91c1c;
         }
+
+        .error-text {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none;
+        }
     </style>
 
-    @if (session('error'))
-        <div class="mb-4 flex items-center justify-between rounded-lg border border-red-300 bg-red-100 px-4 py-3 text-red-800">
-            <span class="text-lg font-bold">{{ session('error') }}</span>
-        </div>
-    @endif
-
-    @if (session('success'))
-        <div
-            class="mb-4 flex items-center justify-between rounded-lg border border-green-300 bg-green-100 px-4 py-3 text-green-800">
-            <span class="text-sm font-medium">{{ session('success') }}</span>
-
-        </div>
-    @endif
-
     <div class="card">
-        <!-- Local Date -->
+        <!-- Date & Time -->
         <div class="date" id="local-date">Loading date...</div>
-
-        <!-- Live Clock -->
         <div class="clock" id="clock">--:--:--</div>
 
-        <!-- Buttons -->
-        <div class="button-group">
-            <form action="{{ route('check-in') }}" method="POST">
-                @csrf
-                <input type="hidden" name="lat" id="lat">
-                <input type="hidden" name="long" id="long">
-                <button type="submit" class="button check-in">Check In</button>
-            </form>
+        <!-- Check In Form -->
+        <form action="{{ route('check-in') }}" method="POST" id="checkInForm">
+            @csrf
 
-            <form action="{{ route('check-out') }}" method="POST">
-                @csrf
+            <label for="place" class="form-label">Choose Place</label>
+            <select name="place" id="place" class="form-control">
+                <option value="0">Choose Place</option>
+                <option value="work_from_home">Work From Home</option>
+                <option value="office">Office</option>
+            </select>
+
+            <div id="place-error" class="error-text">
+                Please select a valid place.
+            </div>
+
+            <input type="hidden" name="lat" id="lat">
+            <input type="hidden" name="long" id="long">
+
+            <div class="button-group">
+                <button type="submit" class="button check-in">Check In</button>
+            </div>
+        </form>
+
+        <!-- Check Out Form -->
+        <form action="{{ route('check-out') }}" method="POST" class="mt-3">
+            @csrf
+            <div class="button-group">
                 <button type="submit" class="button check-out">Check Out</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 @endsection
 
@@ -130,8 +155,30 @@
             document.getElementById('local-date').textContent = dateString;
         }
 
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    document.getElementById('lat').value = position.coords.latitude;
+                    document.getElementById('long').value = position.coords.longitude;
+                });
+            }
+        }
+
+        document.getElementById('checkInForm').addEventListener('submit', function (e) {
+            const place = document.getElementById('place').value;
+            const errorDiv = document.getElementById('place-error');
+
+            if (place === '0') {
+                e.preventDefault();
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
+            }
+        });
+
         updateClock();
         updateDate();
+        getLocation();
         setInterval(updateClock, 1000);
     </script>
 @endsection

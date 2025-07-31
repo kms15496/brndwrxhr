@@ -46,7 +46,7 @@ class LeaveDataTable extends DataTable
             ->addColumn('action', function ($banner) {
                 $html = '
             <div class="d-flex">
-                <a href="' . route('admin.leave-types.edit', $banner->id) . '" class="btn btn-sm btn-primary mr-2">
+                <a href="' . route('leave.edit-status', $banner->id) . '" class="btn btn-sm btn-primary mr-2">
                     <span class="ph-duotone ph-pencil-simple"></span>
                 </a>
                

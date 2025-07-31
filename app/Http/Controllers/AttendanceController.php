@@ -31,8 +31,9 @@ class AttendanceController extends Controller
             'user_id' => Auth::id(),
             'check_in' => $now,
             'ip_address' => $request->ip(),
-            'lat' => $request->lat,
-            'long' => $request->long,
+            // 'lat' => $request->lat,
+            // 'long' => $request->long,
+            'type'=>$request->place
         ]);
 
         return redirect()->back()->with('success', 'Checked in successfully.');
@@ -62,5 +63,5 @@ class AttendanceController extends Controller
 
     }
 
-   
+
 }
