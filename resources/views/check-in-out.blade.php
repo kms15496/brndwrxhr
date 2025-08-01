@@ -93,6 +93,10 @@
         }
     </style>
 
+      @if(Session::has('error'))
+                                    <div class="alert alert-danger"><strong>{{ Session::get('error') }}</strong></div>
+                                @endif
+
     <div class="card">
         <!-- Date & Time -->
         <div class="date" id="local-date">Loading date...</div>

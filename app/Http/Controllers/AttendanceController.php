@@ -23,6 +23,7 @@ class AttendanceController extends Controller
             ->whereDate('check_in', $now->toDateString())
             ->exists();
 
+
         if ($alreadyCheckedIn) {
             return redirect()->back()->with('error', 'You have already checked in today.');
         }
@@ -33,7 +34,7 @@ class AttendanceController extends Controller
             'ip_address' => $request->ip(),
             // 'lat' => $request->lat,
             // 'long' => $request->long,
-            'type'=>$request->place
+            'type' => $request->place
         ]);
 
         return redirect()->back()->with('success', 'Checked in successfully.');
@@ -58,6 +59,9 @@ class AttendanceController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Checked out successfully.');
+        } else {
+            return redirect()->back()->with('error', 'You already checkout for today.');
+
         }
 
 

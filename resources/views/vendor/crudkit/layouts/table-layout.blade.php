@@ -51,6 +51,9 @@
                                 @if(Session::has('fail'))
                                     <div class="alert alert-danger"><strong>{{ Session::get('fail') }}</strong></div>
                                 @endif
+                                @if(Session::has('error'))
+                                    <div class="alert alert-danger"><strong>{{ Session::get('error') }}</strong></div>
+                                @endif
                             </div>
                         </div>
 
@@ -60,8 +63,8 @@
                                 <!-- <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive"> -->
-                                            @yield('content')
-                                        <!-- </div>
+                                @yield('content')
+                                <!-- </div>
                                     </div>
                                 </div> -->
                             </div>

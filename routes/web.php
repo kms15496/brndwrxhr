@@ -8,8 +8,10 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CheckInOutController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LeaveController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,9 +22,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'dashboardView'])->name('dashboard');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('{id}', 'destroy')->name('destroy');
         });
 
-        Route::get('/leave/update/status/{id}',[LeaveController::class,'editView'])->name('leave.edit-status');
-        Route::post('/leave/update/status/{id}',[LeaveController::class,'updateLeave'])->name('leave.update-status');
+    Route::get('/leave/update/status/{id}', [LeaveController::class, 'editView'])->name('leave.edit-status');
+    Route::post('/leave/update/status/{id}', [LeaveController::class, 'updateLeave'])->name('leave.update-status');
 
 });
